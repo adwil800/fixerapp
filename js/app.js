@@ -351,6 +351,7 @@ const closee = document.querySelector("#closeModal");
 const modal_container = document.querySelector(".modal-container");
 const modal = document.querySelector(".modal");
 const body = document.querySelector("body");
+const html = document.querySelector("html");
 const activeR = document.querySelector("#activeRevId");
 const h = document.querySelector(".editorTitle");
 //modal fields
@@ -394,6 +395,7 @@ document.body.addEventListener("click", (e)=>{
       responseEdit.focus();
 
          body.classList.add("body")
+         html.classList.add("body")
          modal_container.classList.add("popmodal");
         //remove options menu
         $(e.target.parentElement).fadeOut(300);
@@ -488,6 +490,7 @@ document.body.addEventListener("click", (e)=>{
             const taskId = e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML;
 
             body.classList.add("body");
+            html.classList.add("body");
             setAgent(fields[0].trim(), fields[1].trim(), taskId)
          }
    
@@ -572,6 +575,7 @@ function setAgent(system, errorTitle, taskId){
 function modalRemoval(){
       modal_container.classList.remove("popmodal");
       body.classList.remove("body");
+      html.classList.remove("body");
       responseEdit.value = "";
 }
 
