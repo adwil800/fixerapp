@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error logger</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./css/custom.css">
+</head>
+<body>
+    
+<div class="section-container">
+  <div class="container">
+    <br> <br>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-4 form-group">
+          <a href="history.html?completed" class="btn btn-block  btn-success ">View completed tasks <i class="fas fa-lightbulb"></i></a>
+        </div>    
+        <div class="col-sm-4 form-group">
+          <a href="history.html?deleted" class="btn btn-block btn-danger">View deleted tasks <i class="fas fa-trash"></i></a> 
+        </div>    
+        <div class="col-sm-4 form-group">
+          <a href="history.html?history" class="btn btn-block btn-primary">View tasks history <i class="fas fa-history"></i></a>  
+        </div>    
+       
+      </div>
+    </div>
+
+
+      <form id="postTask">
+        <br> 
+
+        <div class="row">
+
+      <!--Error type-->
+        <div class="col-md-6"> 
+          <div class="form-group">
+            <select id="issuedTo" class="form-control" >
+              <option disabled selected>Error type</option>
+              <option>Intergy</option>
+              <option>Dentrix</option>
+            </select>
+        </div>
+        </div>
+      <!--Error type-->
+
+      <!--Title-->
+      <div class="col-md-6"> 
+        <div class="form-group">
+          <input id="title" type="text" class="form-control" placeholder="Issue title" >
+        </div>
+      </div>
+      <!--Title-->
+        
+
+  </div>
+
+    <!--TASK-->
+        <div class="row">
+
+          <div class="col-md-12 ">
+
+                    <div class="form-group center ">
+                      <textarea placeholder="Task" class="form-control comentario " id="comment" cols="30" rows="1" ></textarea>
+                    </div>
+          </div>
+        </div>
+      <!--TASK-->
+                    <button type="submit"  class="btn btn-light">Post task</button>
+                     
+      </form>
+               
+  </div>
+</div>
+<br>
+
+    <div class="row">
+
+
+          <div class="col-md-3 offset-4">
+              <h3 id="taskTitle" class="text-center"></h3>
+              <h3 id="taskCount" class="text-center"></h3>
+          </div>
+          <!--Error type-->
+            <div class="col-md-3"> 
+              <div class="form-group">
+                <select id="agentFilter" class="form-control" >
+                  <option selected>All</option>
+                  <option>Luis Rosales</option>
+                  <option>Francisco Gerónimo</option>
+                  <option>Adwil Castillo</option>
+                  <option>Not set</option>
+                </select>
+              </div>
+            </div>
+          <!--Error type-->
+
+
+    </div>
+
+</div>
+
+<div class="col-xs-12" id ="task"> 
+    <!--TASKS CONTENT--> 
+</div> 
+
+<div class="modal-container">
+  <div class="modalme">
+    <h2 class="editorTitle">Task Editor</h2>
+      <div class="editorContainer">
+
+        <div class ="revEditor">
+
+            <div class="col-md-12"> 
+
+              <div class="row">
+            <!--Error type-->
+              <div class="col-md-6"> 
+                <div class="form-group">
+                <select id="issuedToup" class="form-control" >
+                  <option disabled selected>Error type</option>
+                  <option>Intergy</option>
+                  <option>Dentrix</option>
+                </select>
+              </div>
+            </div>
+            <!--Error type-->
+
+            <!--Title-->
+              <div class="col-md-6"> 
+                <div class="form-group">
+                  <input id="titleup" type="text" class="form-control" placeholder="Issue title" >
+                </div>
+              </div>
+            <!--Title-->
+
+          </div>
+            </div>
+
+            <div class="" style="padding: 10px;">
+              <textarea placeholder="Response" class="form-control responseInput" id="editor" cols="30" rows="1"></textarea>
+            </div>
+        </div>
+        <br>
+          <button id="updateReview" class=" btn btn-outline-secondary ">Update</button>
+          <button id="closeModal" class=" btn btn-outline-secondary ">Close</button>
+          <span id="activeRevId"></span>
+
+      </div>
+  </div>
+</div>
+
+
+<!--ASSIGN AGENT MODAL-->
+<!--ASSIGN AGENT MODAL-->
+
+    <!-- TASK STATUS TEMPLATE -->
+<div id="popover-content" style="display: none">
+  <ul class="list-group custom-popover">
+    <li><i class="fas fa-circle yellow"><span>New task</span></i></li>
+    <li><i class="fas fa-circle green"><span>Unedited task</span></i></li>
+    <li><i class="fas fa-circle red"><span>Edited task</span></i></li>
+  </ul>
+</div>
+    <!-- TASK STATUS TEMPLATE -->
+
+
+<script src="./js/bs/jquery.min.js"></script>
+<script src="./js/bs/bootstrap.bundle.min.js"></script>
+<script src="./js/app.js"></script>
+
+
+</body>
+</html>

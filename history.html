@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task history</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="./css/custom.css">
+</head>
+<body>
+        
+<div class="section-container">
+  <div class="container">
+    <br> <br>
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="col-sm-3 form-group">
+         <a href="index.html" class="btn btn-block  btn-outline-warning "><i class="fas fa-arrow-left"></i>  Back to main site</a>
+        </div>    
+         <div class="col-sm-3 form-group">
+          <a href="history.html?completed" id="completed" class="btn btn-block  btn-success ">View completed tasks <i class="fas fa-lightbulb"></i></a>
+        </div>    
+        <div class="col-sm-3 form-group">
+          <a href="history.html?deleted" id="deleted" class="btn btn-block btn-danger">View deleted tasks <i class="fas fa-trash"></i></a> 
+        </div>   
+        <div class="col-sm-3 form-group">
+          <a href="history.html?history" id="history" class="btn btn-block btn-primary">View task history<i class="fas fa-history"></i></a> 
+        </div>   
+
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+
+      <!--Error type-->
+      <div class="col-md-3 offset-md-3"> 
+        <div class="form-group">
+          <select id="filterName" class="form-control" >
+            <option disabled selected>Agent</option>
+            <option>Luis Rosales</option>
+            <option>Francisco Gerónimo</option>
+            <option>Adwil Castillo</option>
+          </select>
+        </div>
+      </div>
+      <!--Error type-->
+      <!--Error type-->
+      <div class="col-md-3"> 
+        <div class="form-group">
+          <select id="filterSystem" class="form-control" >
+            <option disabled selected>Software</option>
+            <option>Intergy</option>
+            <option>Dentrix</option>
+          </select>
+        </div>
+      </div>
+    <!--Error type-->
+
+   
+
+    </div>
+
+  </div>
+</div>
+
+  <br>
+  <h3 id="taskTitle" class="text-center"></h3>
+  <h3 id="taskCount" class="text-center"></h3>
+
+  <div class="col-xs-12" id ="task">
+    <!--REVIEWS CONTENT--> 
+  </div> 
+
+<!-- TASK STATUS TEMPLATE -->
+<div id="popover-content" style="display: none">
+  <ul class="list-group custom-popover">
+    <li><i class="fas fa-circle yellow"><span>New task</span></i></li>
+    <li><i class="fas fa-circle green"><span>Unedited task</span></i></li>
+    <li><i class="fas fa-circle red"><span>Edited task</span></i></li>
+  </ul>
+</div>
+    <!-- TASK STATUS TEMPLATE -->
+  
+<script src="./js/bs/jquery.min.js"></script>
+<script src="./js/bs/bootstrap.bundle.min.js"></script>
+  <script src="./js/all.js"></script>
+
+
+
+</body>
+</html>
