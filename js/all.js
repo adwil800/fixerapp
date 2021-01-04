@@ -95,7 +95,7 @@ const taskContainer = document.querySelector("#task");
   //FETCH TEACHER tasks FROM DB
    let response;
      try {
-      response = await fetch(`http://ca-42yan.ondigitalocean.app/api/v1/tasks`);
+      response = await fetch(`https://ca-42yan.ondigitalocean.app/api/v1/tasks`);
      } catch {
         taskTitle.classList += " red halfOpacity";
         taskTitle.innerHTML = "Error logger couldn't connect to the server";

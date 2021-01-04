@@ -57,12 +57,12 @@ async function loadTasks(){
   //FETCH TEACHER tasks FROM DB
    let response;
      try {
-      response = await fetch(`http://ca-42yan.ondigitalocean.app/api/v1/tasks`);
+      response = await fetch(`https://ca-42yan.ondigitalocean.app/api/v1/tasks`);
       } catch (e) {
         taskTitle.classList += " red halfOpacity";
         taskTitle.innerHTML = "Error logger couldn't connect to the server";
          $(taskTitle).fadeIn(200);
-         //document.querySelector("head").innerHTML += '<meta http-equiv="refresh" content="120"/>';
+         //document.querySelector("head").innerHTML += '<meta https-equiv="refresh" content="120"/>';
          setTimeout(() => {
             loadTasks();
             console.clear();
@@ -262,7 +262,7 @@ taskPost.addEventListener('submit', (e) => {
          },
          body:JSON.stringify(data)
       }
-      if(fetcher("http://ca-42yan.ondigitalocean.app/api/v1/tasks", options)){
+      if(fetcher("https://ca-42yan.ondigitalocean.app/api/v1/tasks", options)){
          document.querySelector("#comment").style.height = "37px";
          document.querySelector("#comment").value = '';//clear field
          document.querySelector("#issuedTo").value = 'Error type';//clear field
@@ -303,7 +303,7 @@ document.querySelector("#updateReview").addEventListener("click", (e) =>{
          body:JSON.stringify(data)
       } 
 
-         if(fetcher(`http://ca-42yan.ondigitalocean.app/api/v1/tasks/${activeR.value}`, options))
+         if(fetcher(`https://ca-42yan.ondigitalocean.app/api/v1/tasks/${activeR.value}`, options))
                modalUserExp("Task updated!");
 });
 //UPDATE REVIEW WITH NEW EDIT
@@ -413,7 +413,7 @@ document.body.addEventListener("click", (e)=>{
             },
             body:JSON.stringify(data)
          }
-         if(fetcher(`http://ca-42yan.ondigitalocean.app/api/v1/tasks/${activeR.value}`, options)){
+         if(fetcher(`https://ca-42yan.ondigitalocean.app/api/v1/tasks/${activeR.value}`, options)){
             //remove options menu
                $(e.target.parentElement).fadeOut(200);
                //remove div container
@@ -453,7 +453,7 @@ document.body.addEventListener("click", (e)=>{
             body:JSON.stringify(data)
          }
 
-         if(fetcher(`http://ca-42yan.ondigitalocean.app/api/v1/tasks/${activeR.value}`, options)){
+         if(fetcher(`https://ca-42yan.ondigitalocean.app/api/v1/tasks/${activeR.value}`, options)){
             //remove options menu
                $(e.target.parentElement).fadeOut(200);
                //get modal
@@ -532,7 +532,7 @@ document.body.addEventListener("click", (e)=>{
                body:JSON.stringify(data)
             };
    
-            if(fetcher(`http://ca-42yan.ondigitalocean.app/api/v1/tasks/${taskId}`, options)){
+            if(fetcher(`https://ca-42yan.ondigitalocean.app/api/v1/tasks/${taskId}`, options)){
                modalAddon("Task assigned!", true, true);
                setTimeout(()=>{
                   loadTasks();
