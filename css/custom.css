@@ -2,7 +2,8 @@ html {
   overflow-x: hidden;
 }
 body {
-  background-color: black;
+  background-color: black;   
+  overflow-x: hidden;
 }
 
 .modal-container {
