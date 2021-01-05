@@ -174,7 +174,7 @@ const taskContainer = document.querySelector("#task");
                   <span><strong id="filterAgentId" class="${agentColor}">${tasks[t].agent} </strong></span> 
                   <i class="fas fa-circle popup ${color}" data-toggle="popover" data-original-title="Task status"></i>
                   </h3>
-                     <pre class="wrapup text-wrap "><p>${tasks[t].task}</p> </pre>
+                     <pre><p>${tasks[t].task}</p> </pre>
                   
                      <span >${newDate}</span> 
                      `;

@@ -126,6 +126,7 @@ async function loadTasks(){
                //set new task status
                color = "yellow";
             }else{
+
                //get edited status
                   if(tasks[t].edited)
                      color = "red";// edited
@@ -149,8 +150,6 @@ async function loadTasks(){
            taskDiv.className = "alterConstant-width btn alterReview cleaner col-sm-10 offset-sm-1";
 
             
-            const fulldate = tasks[t].date.split(" ");
-            const newDate = fulldate[0]+", "+fulldate[1]+" "+fulldate[2]+" "+fulldate[3]+", "+fulldate[4];
             //Just for the fun of it
             let agentColor = "", systemColor = "";
             if(tasks[t].agent == "Luis Rosales")
@@ -187,7 +186,7 @@ async function loadTasks(){
 
                      <pre class=""><p>${tasks[t].task}</p></pre>
                   
-                     <span>${newDate}</span> 
+                     <span>${tasks[t].date}</span> 
                      `;
            //Getting replies on the right tasks
            //Getting replies on the right tasks
@@ -240,6 +239,10 @@ taskPost.addEventListener('submit', (e) => {
       const issuedTo = document.querySelector("#issuedTo").value;
       const title = document.querySelector("#title").value;
       const task = document.querySelector("#comment").value;
+      const newDate = new Date().toLocaleString("en-US", {timeZone: "America/Dominica"});
+      
+      const temp = newDate.split("/");
+      const date = temp[1]+"/"+temp[0]+"/"+temp[2];
 
      //VALIDATIONS      VALIDATE POSTING NOTHINGNESS
          if(!taskValidation(issuedTo, "Please select the error type", "Error type", "issuedTo") ||
@@ -254,7 +257,7 @@ taskPost.addEventListener('submit', (e) => {
            }
      //VALIDATIONS      VALIDATE POSTING NOTHINGNESS
 
-      const data = {title, issuedTo, task};
+      const data = {title, issuedTo, task, date};
       const options = {
          method: 'POST',
          headers:{
@@ -489,15 +492,41 @@ document.body.addEventListener("click", (e)=>{
             //set issue title = fields[1].trim();
             const taskId = e.target.parentElement.parentElement.parentElement.parentElement.firstElementChild.innerHTML;
 
+            //Fetching to see if not set task is already taken
+            async function agentF(){
+            let agentFinder;
+            try {
+               agentFinder = await fetch(`https://ca-42yan.ondigitalocean.app/api/v1/tasks/${taskId}`);
+               } catch {
+                  return;
+               }
+            let agentAssigned = await agentFinder.json();
+                agentAssigned = agentAssigned.data;
+            if(agentAssigned.agent != "Not set"){
+               modalAddon(`Task already taken by ${agentAssigned.agent}`, true, true )
+            }
+
+         }
+            agentF();
+
+            //Fetching to see if not set task is already taken
+
             body.classList.add("body");
             html.classList.add("body");
-            setAgent(fields[0].trim(), fields[1].trim(), taskId)
+            setAgent(fields[0].trim(), fields[1].trim(), taskId); 
          }
    
          if(e.target.id == "setAgent"){
+
+           
+            
             $("#agentFilter").val("All");
             const taskId = document.querySelector("#setAgent").parentElement.firstElementChild.innerHTML;
             const agentName = document.querySelector("#setAgent").parentElement.querySelector("#agent").value; 
+
+               
+
+
             if(agentName == "Agent"){
                //Get agent editor and hide it
                const agentEditor = document.querySelector("#setAgent").parentElement;
