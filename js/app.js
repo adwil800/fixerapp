@@ -101,20 +101,23 @@ async function loadTasks(){
       
       $(taskTitle).fadeIn(200);
 
-        let editDeleteDiv = `
-                    <i class="fa">
-                       <div class="col-sm-4">
-                       <div class="constant-width btn edit-deleteReview slideTop">
-                          <button id="edit" class="btn btn-block btn-outline-secondary constant-width">Edit</button>
-                          <button id="delete" class="btn btn-block btn-outline-danger constant-width">Delete</button>
-                          <button id="complete" class="btn btn-block btn-outline-success constant-width">Complete</button>
-                       </div>
-                       </div>
-                    </i>`; 
-
-         let facog = '<i class="fa fa-cog black"></i>';
          show = false;
         for (t in tasks){
+
+
+         let editDeleteDiv = `
+         <i class="fa">
+            <div class="col-sm-4">
+            <div class="constant-width btn edit-deleteReview slideTop">
+               <button id="edit" class="btn btn-block btn-outline-secondary constant-width">Edit</button>
+               <button id="delete" class="btn btn-block btn-outline-danger constant-width">Delete</button>
+               <button id="complete" class="btn btn-block btn-outline-success constant-width">Complete</button>
+            </div>
+            </div>
+         </i>`; 
+
+         let facog = '<i class="fa fa-cog black"></i>';
+
                let  color; //for task status
                //Get agent assigment bar on or editdelreview on place 
             if(tasks[t].agent == "Not set"){
@@ -186,7 +189,7 @@ async function loadTasks(){
 
                      <pre class=""><p>${tasks[t].task}</p></pre>
                   
-                     <span>${tasks[t].date}</span> 
+                     <span class="bold">Created at: ${tasks[t].date}</span> 
                      `;
            //Getting replies on the right tasks
            //Getting replies on the right tasks
@@ -410,7 +413,11 @@ document.body.addEventListener("click", (e)=>{
          //div parent to remove 
          const issueDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
          //DELETE request to api
-         const data = {deleted:true};
+         const newDate = new Date().toLocaleString("en-US", {timeZone: "America/Dominica"});
+         const temp = newDate.split("/");
+         const date = temp[1]+"/"+temp[0]+"/"+temp[2];
+
+         const data = {deleted: true, completionDate: date};
          const options = {
             method: 'PUT',
             headers:{
@@ -449,7 +456,11 @@ document.body.addEventListener("click", (e)=>{
          //div parent to remove 
          const issueDiv = e.target.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement;
          //DELETE request to api
-         const data = {completed:true};
+         const newDate = new Date().toLocaleString("en-US", {timeZone: "America/Dominica"});
+            const temp = newDate.split("/");
+            const date = temp[1]+"/"+temp[0]+"/"+temp[2];
+
+         const data = {completed: true, completionDate: date};
          const options = {
             method: 'PUT',
             headers:{

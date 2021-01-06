@@ -3,25 +3,44 @@ document.addEventListener("DOMContentLoaded", loadFulfilledTasks())
 
 document.querySelector("#filterSystem").addEventListener("change", filterBySystem);
 document.querySelector("#filterName").addEventListener("change", filterByAgent);
+$("#viewAll").on("click", () => {
+
+const taskContainer = document.querySelector("#task");
+    $(taskContainer).fadeOut();
+    $("#filterSystem").val("Software"); 
+    $("#filterName").val("Agent"); 
+
+    setTimeout(()=>{
+
+    loadFulfilledTasks();
+    }, 300);
+
+});
 
 let noContentTaskTitle = "",
     taskTitleMessage = "",
     showDeleted = false,
     showCompleted = false,
-    showHistory = false;
+    showHistory = false,
+    comdel = "",
+    comdelClass = "";
 
 let area = window.location.href.split("?")[1];
     if(area == "deleted"){
         noContentTaskTitle = "No deleted tasks";
         taskTitleMessage = "Deleted tasks";
         showDeleted = true;
-        $("#deleted").addClass("disabled");
+        comdel = "Deleted at: ";
+        comdelClass = "red";
+    $("#deleted").addClass("disabled");
     }
     else if(area == "completed"){
         noContentTaskTitle = "No completed tasks";
         taskTitleMessage = "Completed tasks";
         showCompleted = true;
         $("#completed").addClass("disabled");
+        comdel = "Completed at: ";
+        comdelClass = "green";
     }
     else if(area == "history"){
         noContentTaskTitle = "No past tasks";
@@ -134,7 +153,17 @@ const taskContainer = document.querySelector("#task");
                 continue;
         if(showHistory)
             if(tasks[t].deleted == false && tasks[t].completed == false)
+                
                 continue;
+            else{
+                if(tasks[t].deleted == true){
+                    comdel = "Deleted at: ";
+                    comdelClass = "red";
+                }else{
+                    comdel = "Completed at: ";
+                    comdelClass = "green";
+                }
+            }
 
            const colContainer = document.createElement("div");
            colContainer.className = "col-sm-12";
@@ -148,8 +177,6 @@ const taskContainer = document.querySelector("#task");
             else
                 color = "green";
                 
-                const fulldate = tasks[t].date.split(" ");
-                const newDate = fulldate[0]+", "+fulldate[1]+" "+fulldate[2]+" "+fulldate[3]+", "+fulldate[4];
 
                 //Just for the fun of it
                 let agentColor = "", systemColor = "";
@@ -176,7 +203,8 @@ const taskContainer = document.querySelector("#task");
                   </h3>
                      <pre><p>${tasks[t].task}</p> </pre>
                   
-                     <span >${newDate}</span> 
+                     <span class="bold">Created at: ${tasks[t].date}</span> |||
+                     <span class="bold ${comdelClass}">${comdel}${tasks[t].completionDate}</span> 
                      `;
            //Getting replies on the right tasks
            //Getting replies on the right tasks
