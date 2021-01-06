@@ -140,8 +140,7 @@ body {
 
 .cleaner {
   cursor: inherit !important;
-
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
 }
 
@@ -150,7 +149,7 @@ body {
 }
 
 textarea {
-  max-height: 108px;
+  max-height: 200px;
 }
 
 #taskTitle {
@@ -261,4 +260,7 @@ pre {
 }
 .pointerEvents {
   pointer-events: none;
+}
+.bold {
+  font-weight: bold;
 }
