@@ -227,6 +227,7 @@ const taskContainer = document.querySelector("#task");
         else 
             removePointer(false);
 
+            taskContainer.classList+=" row-reverse";
             //Load tasks into html
   }
 

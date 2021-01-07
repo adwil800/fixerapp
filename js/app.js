@@ -47,6 +47,8 @@ function removePointer(add){
 
 async function loadTasks(){
 
+   const task = document.querySelector("#comment").value = "Agent name:\nPatient name:\nDOB:\n\nIssue:\n\nResolution:";
+
    const taskContainer = document.querySelector("#task");
    $(taskContainer).fadeOut(200);
    setTimeout(()=>{
