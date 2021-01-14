@@ -209,6 +209,12 @@ i {
   color: rgb(74, 94, 126) !important;
 }
 
+.lineThrough {
+  text-decoration: line-through;
+}
+.gray {
+  color: gray !important;
+}
 .halfOpacity {
   opacity: 0.7;
 }
@@ -263,4 +269,8 @@ pre {
 }
 .bold {
   font-weight: bold;
+}
+
+.abs {
+  position: absolute;
 }

@@ -112,6 +112,8 @@ const taskTitle = document.querySelector("#taskTitle");
                     let agentColor = "", systemColor = "";
                     if(task.agent == "Luis Rosales")
                         agentColor = "red";
+                    else if(task.agent == "Francisco Gerónimo")
+                        agentColor = "lineThrough gray";
                     else if(task.agent == "Mery Deilaire")
                         agentColor = "blue";
                     else

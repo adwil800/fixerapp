@@ -61,9 +61,9 @@ function setAgent(system, errorTitle, taskId){
                             <select id="agent" class="form-control">
                                <option disabled selected>Agent</option>
                                <option>Luis Rosales</option>
-                               <option>Mery Deilaire</option>
                                <option>Adwil Castillo</option>
-                            </select>
+                               <option>Mery Deilaire</option>
+                               </select>
                           </div>
                 <button id="setAgent" class=" btn btn-outline-secondary ">Assign task</button>
                       </div>
