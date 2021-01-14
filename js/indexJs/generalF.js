@@ -61,7 +61,7 @@ function setAgent(system, errorTitle, taskId){
                             <select id="agent" class="form-control">
                                <option disabled selected>Agent</option>
                                <option>Luis Rosales</option>
-                               <option>Francisco Gerónimo</option>
+                               <option>Mery Deilaire</option>
                                <option>Adwil Castillo</option>
                             </select>
                           </div>
@@ -187,8 +187,7 @@ async function loadTasks(){
       $(taskTitle).fadeIn(200);
 
          show = false;
-        for (t in tasks){
-
+        tasks.forEach((task) => {
 
          let editDeleteDiv = `
          <i class="fa">
@@ -205,18 +204,18 @@ async function loadTasks(){
 
                let  color; //for task status
                //Get agent assigment bar on or editdelreview on place 
-            if(tasks[t].agent == "Not set"){
+            if(task.agent == "Not set"){
                //Remove facog and options
                facog = "";
                editDeleteDiv="";
                //Add agent assignment link
-               tasks[t].agent = `<a id="assignAgent" href="">${tasks[t].agent}</a>`
+               task.agent = `<a id="assignAgent" href="">${task.agent}</a>`
                //set new task status
                color = "yellow";
             }else{
 
                //get edited status
-                  if(tasks[t].edited)
+                  if(task.edited)
                      color = "red";// edited
                   else
                      color = "green";// unedited
@@ -224,10 +223,10 @@ async function loadTasks(){
             }
 
             //Filtering what I want to show
-           if(tasks[t].deleted == true)
-               continue;
-           else if(tasks[t].completed == true)
-               continue;
+           if(task.deleted == true)
+               return;
+           else if(task.completed == true)
+               return;
            else
                show = true;
             //Filtering what I want to show
@@ -240,36 +239,36 @@ async function loadTasks(){
             
             //Just for the fun of it
             let agentColor = "", systemColor = "";
-            if(tasks[t].agent == "Luis Rosales")
+            if(task.agent == "Luis Rosales")
                agentColor = "red";
-            else if(tasks[t].agent == "Francisco Gerónimo")
+            else if(task.agent == "Mery Deilaire")
                agentColor = "blue";
             else
                agentColor = "darkgray";
 
-            if(tasks[t].issuedTo == "Intergy")
+            if(task.issuedTo == "Intergy")
                systemColor = "green"               
             //Just for the fun of it
 
             
             taskDiv.innerHTML +=  `
-                  <span id="revId" >${tasks[t]._id}</span> 
+                  <span id="revId" >${task._id}</span> 
                   
                   
                   
                   <h3 class="errorSys ${systemColor}">
-                  <strong>${tasks[t].issuedTo} - ${tasks[t].title} - </strong>
+                  <strong>${task.issuedTo} - ${task.title} - </strong>
                      
-                     <span><strong id="filterAgentId" class="${agentColor}">${tasks[t].agent} </strong></span> 
+                     <span><strong id="filterAgentId" class="${agentColor}">${task.agent} </strong></span> 
 
                      <i class="fas fa-circle popup ${color}" data-toggle="popover" data-original-title="Task status"></i>
 
                      <span>${facog} ${editDeleteDiv} </span>
                   </h3>
                   <br>
-                     <pre class=""><p>${tasks[t].task}</p></pre>
+                     <pre class=""><p>${task.task}</p></pre>
                   
-                     <span class="bold">Created at: ${tasks[t].date}</span> 
+                     <span class="bold">Created at: ${task.date}</span> 
                      `;
            //Getting replies on the right tasks
            //Getting replies on the right tasks
@@ -279,7 +278,8 @@ async function loadTasks(){
               setTimeout(()=>{
                taskContainer.appendChild(colContainer);
                },500);
-        }
+        });
+
          if(!show){
             
             taskTitle.innerHTML = "No pending tasks";

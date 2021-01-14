@@ -15,7 +15,7 @@ if(area == "deleted"){
     showDeleted = true;
     comdel = "Deleted at: ";
     comdelClass = "red";
-$("#deleted").addClass("disabled");
+    $("#deleted").addClass("disabled");
 }
 else if(area == "completed"){
     noContentTaskTitle = "No completed tasks";
@@ -74,20 +74,19 @@ const taskTitle = document.querySelector("#taskTitle");
          taskTitle.innerHTML = taskTitleMessage;
          $(taskTitle).fadeIn(200);
     
-            for (t in tasks){
+            tasks.forEach((task) => {
     
             if(showDeleted)
-                if(tasks[t].deleted == false)
-                    continue;
+                if(task.deleted == false)
+                    return;
             if(showCompleted)
-                if(tasks[t].completed == false)
-                    continue;
+                if(task.completed == false)
+                    return;
             if(showHistory)
-                if(tasks[t].deleted == false && tasks[t].completed == false)
-                    
-                    continue;
+                if(task.deleted == false && task.completed == false)
+                    return;
                 else{
-                    if(tasks[t].deleted == true){
+                    if(task.deleted == true){
                         comdel = "Deleted at: ";
                         comdelClass = "red";
                     }else{
@@ -103,7 +102,7 @@ const taskTitle = document.querySelector("#taskTitle");
     
                //get edited status
                let color;
-                if(tasks[t].edited)
+                if(task.edited)
                     color="red";
                 else
                     color = "green";
@@ -111,31 +110,31 @@ const taskTitle = document.querySelector("#taskTitle");
     
                     //Just for the fun of it
                     let agentColor = "", systemColor = "";
-                    if(tasks[t].agent == "Luis Rosales")
+                    if(task.agent == "Luis Rosales")
                         agentColor = "red";
-                    else if(tasks[t].agent == "Francisco Gerónimo")
+                    else if(task.agent == "Mery Deilaire")
                         agentColor = "blue";
                     else
                         agentColor = "darkgray";
     
-                    if(tasks[t].issuedTo == "Intergy")
+                    if(task.issuedTo == "Intergy")
                         systemColor = "green"               
                 //Just for the fun of it
     
     
                     taskDiv.innerHTML +=  `
-                      <span id="revId" >${tasks[t]._id}</span> 
+                      <span id="revId" >${task._id}</span> 
                       
                       <h3 class="errorSys ${systemColor}">
-                      <strong>${tasks[t].issuedTo} - ${tasks[t].title} - </strong>
+                      <strong>${task.issuedTo} - ${task.title} - </strong>
                       
-                      <span><strong id="filterAgentId" class="${agentColor}">${tasks[t].agent} </strong></span> 
+                      <span><strong id="filterAgentId" class="${agentColor}">${task.agent} </strong></span> 
                       <i class="fas fa-circle popup ${color}" data-toggle="popover" data-original-title="Task status"></i>
                       </h3>
-                         <pre><p>${tasks[t].task}</p> </pre>
+                         <pre><p>${task.task}</p> </pre>
                       
-                         <span class="bold">Created at: ${tasks[t].date}</span> |||
-                         <span class="bold ${comdelClass}">${comdel}${tasks[t].completionDate}</span> 
+                         <span class="bold">Created at: ${task.date}</span> |||
+                         <span class="bold ${comdelClass}">${comdel}${task.completionDate}</span> 
                          `;
                //Getting replies on the right tasks
                //Getting replies on the right tasks
@@ -143,7 +142,7 @@ const taskTitle = document.querySelector("#taskTitle");
                   colContainer.appendChild(taskDiv);
                   colContainer.innerHTML+="<br><br>";
                   taskContainer.appendChild(colContainer);
-            } 
+            });
             
               setTimeout(()=>{
                 $(taskContainer).fadeIn();

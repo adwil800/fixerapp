@@ -6,19 +6,11 @@ document.querySelector("#agentFilter").addEventListener("change", filterByAgent)
 
 //ADD REVIEW 
 const taskPost = document.querySelector("#postTask");
-  
 taskPost.addEventListener('submit', (e) => postTasks(e));
-//ADD REVIEW   
-
 //UPDATE REVIEW WITH NEW EDIT 
 document.querySelector("#updateReview").addEventListener("click", (e) => updateTasks(e));
-//UPDATE REVIEW WITH NEW EDIT
-
-
 //EDIT OR DELETE REVIEW 
 document.body.addEventListener("click", (e) =>editDelTasks(e));
-//EDIT OR DELETE REVIEW
-
 //MODAL LOADING
 document.body.addEventListener("click", (e) => superModal(e)); 
  
