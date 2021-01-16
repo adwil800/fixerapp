@@ -34,7 +34,6 @@ else if(area == "history"){
 //Receiving parameters
 
 
-
 async function loadFulfilledTasks(){
     
 const taskContainer = document.querySelector("#task");
@@ -154,17 +153,17 @@ const taskTitle = document.querySelector("#taskTitle");
             taskCount.innerHTML = "Task count: "+calcCount(taskContainer);
             $(taskCount).fadeIn(300);
     
-            if(calcCount(taskContainer) == 0)
+            if(calcCount(taskContainer) == 0){
+                taskTitle.innerHTML = noContentTaskTitle;
                 removePointer(true);
+            }
             else 
                 removePointer(false);
-    
-                taskContainer.classList+=" row-reverse";
                 //Load tasks into html
+
+
       }
     
-
-
 function removePointer(add){
 
         if(add){
@@ -172,22 +171,29 @@ function removePointer(add){
             $("#filterName").parent().addClass("noCursor");
             $("#filterSystem").addClass("pointerEvents");
             $("#filterSystem").parent().addClass("noCursor");
+            $("#filterResponsible").addClass("pointerEvents");
+            $("#filterResponsible").parent().addClass("noCursor");
+            $("#viewAll").addClass("pointerEvents");
+            $("#viewAll").parent().addClass("noCursor");
         }else{
              $("#filterName").removeClass("pointerEvents");
              $("#filterName").parent().removeClass("noCursor");
              $("#filterSystem").removeClass("pointerEvents");
              $("#filterSystem").parent().removeClass("noCursor");
+             $("#filterResponsible").removeClass("pointerEvents");
+             $("#filterResponsible").parent().removeClass("noCursor");
+             $("#viewAll").removeClass("pointerEvents");
+             $("#viewAll").parent().removeClass("noCursor");
             }
     }
 
-
-
-    $("#viewAll").on("click", () => {
+$("#viewAll").on("click", () => {
 
         const taskContainer = document.querySelector("#task");
             $(taskContainer).fadeOut();
             $("#filterSystem").val("Software"); 
             $("#filterName").val("Agent"); 
+            $("#filterResponsible").val(""); 
         
             setTimeout(()=>{
         
@@ -196,70 +202,99 @@ function removePointer(add){
         
         });
         
-         function filterByAgent(e){
-            const agentName = e.target.value.toLowerCase();
-            let counter = 0;
-            document.querySelectorAll("#filterAgentId").forEach((task) =>{
-                const item = task.textContent;
-            if (item.toLowerCase().indexOf(agentName) != -1){
-                        $(task.parentElement.parentElement.parentElement.parentElement).fadeIn();
-                        counter++;
+function filterByAgent(e){
+    const agentName = e.target.value.toLowerCase();
+    let counter = 0;
+    document.querySelectorAll("#filterAgentId").forEach((task) =>{
+        const item = task.textContent;
+    if (item.toLowerCase().indexOf(agentName) != -1){
+                $(task.parentElement.parentElement.parentElement.parentElement).fadeIn();
+                counter++;
+    }
+    else 
+                $(task.parentElement.parentElement.parentElement.parentElement).fadeOut();
+    });
+        counterCheck(counter);
+}
+        
+function filterBySystem(e){
+    const systemName = e.target.value.toLowerCase();
+    let counter = 0;
+    document.querySelectorAll(".errorSys>strong").forEach((task) =>{
+        const item = task.firstChild.textContent.split("-")[0].trim();
+        if (item.toLowerCase().indexOf(systemName) != -1){
+            $(task.parentElement.parentElement.parentElement).fadeIn();
+                counter++;
+        }
+        else 
+            $(task.parentElement.parentElement.parentElement).fadeOut();
+    });
+    counterCheck(counter);
+}
+
+   
+function filterByResponsibleAgent(e){
+    try{
+        const responsibleName = e.target.value.toLowerCase();
+        let counter = 0;
+        document.querySelectorAll("pre>p").forEach((task) =>{
+            let item = task.firstChild.textContent.split(":")[1].trim();
+            item = item.split("\n")[0].trim();
+    
+            if (item.toLowerCase().indexOf(responsibleName) != -1){
+                $(task.parentElement.parentElement.parentElement).fadeIn();
+                    counter++;
             }
             else 
-                        $(task.parentElement.parentElement.parentElement.parentElement).fadeOut();
-            });
-                counterCheck(counter);
-        }
-        
-         function filterBySystem(e){
-            const systemName = e.target.value.toLowerCase();
-            let counter = 0;
-            document.querySelectorAll(".errorSys>strong").forEach((task) =>{
-                const item = task.firstChild.textContent.split("-")[0].trim();
-                if (item.toLowerCase().indexOf(systemName) != -1){
-                    $(task.parentElement.parentElement.parentElement).fadeIn();
-                        counter++;
-                }
-                else 
-                    $(task.parentElement.parentElement.parentElement).fadeOut();
-            });
-            counterCheck(counter);
-        }
-        
-        function counterCheck(counter){
-            if(counter == 0){
-                document.querySelector("#taskTitle").innerHTML="No results"
-                $(document.querySelector("#taskCount")).fadeOut();
-            }else{
-                document.querySelector("#taskTitle").innerHTML=taskTitleMessage;
-                $(document.querySelector("#taskCount")).fadeIn();
-                document.querySelector("#taskCount").innerHTML="Task count: "+counter;
-            }
-        }
-        
-          function calcCount(element){
-            return element.childElementCount;
-          }
-        
+                $(task.parentElement.parentElement.parentElement).fadeOut();
+        });
+        counterCheck(counter);
+    }catch (err){
+
+    }
+
+}
+
+function counterCheck(counter){
+    if(counter == 0){
+        document.querySelector("#taskTitle").innerHTML="No results";
+        $(document.querySelector("#taskCount")).fadeOut();
+    }else{
+        document.querySelector("#taskTitle").innerHTML=taskTitleMessage;
+        $(document.querySelector("#taskCount")).fadeIn();
+        document.querySelector("#taskCount").innerHTML="Task count: "+counter;
+    }
+    }
+
+    function calcCount(element){
+    return element.childElementCount;
+}
+
           
         //POP OVER TASK STATUS
-        $('body').popover({
-            html: true,
-            content: function() {
-               return $('#popover-content').html();
-            },
-            trigger: "hover",
-            selector: ".popup"
-         });
-        
-        
-         //clear fields for filtering, only one at a time
-         $("#filterName").on("focusin", ()=>{
-             $("#filterSystem").val("Software"); 
-            });
-        
-         $("#filterSystem").on("focusin", ()=>{
-             $("#filterName").val("Agent"); 
-            });
-        
+    $('body').popover({
+        html: true,
+        content: function() {
+        return $('#popover-content').html();
+        },
+        trigger: "hover",
+        selector: ".popup"
+    });
+    
+    //clear fields for filtering, only one at a time
+    $("#filterName").on("focusin", ()=>{
+        $("#filterSystem").val("Software"); 
+        $("#filterResponsible").val(""); 
+    });
+
+    $("#filterSystem").on("focusin", ()=>{
+        $("#filterName").val("Agent"); 
+        $("#filterResponsible").val(""); 
+    });
+    
+    $("#filterResponsible").on("focusin", ()=>{
+        $("#filterName").val("Agent"); 
+        $("#filterSystem").val("Software"); 
+    });
+                
           
