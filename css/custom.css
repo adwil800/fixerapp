@@ -135,7 +135,7 @@ body {
 .revEditor {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 200px;
+  max-height: 500px;
 }
 
 .cleaner {
@@ -273,4 +273,8 @@ pre {
 
 .abs {
   position: absolute;
+}
+
+.mleft {
+  margin-left: 44px;
 }
