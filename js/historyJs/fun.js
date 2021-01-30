@@ -44,7 +44,7 @@ const taskTitle = document.querySelector("#taskTitle");
       //FETCH TEACHER tasks FROM DB
        let response;
          try {
-          response = await fetch(`https://ca-42yan.ondigitalocean.app/api/v1/tasks`);
+          response = await fetch(`https://ca-42yan.ondigitalocean.app/api/v1/tasks?sort=true`);
          } catch {
             taskTitle.classList += " red halfOpacity";
             taskTitle.innerHTML = "Error logger couldn't connect to the server";
